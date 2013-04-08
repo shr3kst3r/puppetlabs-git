@@ -10,8 +10,9 @@
 #
 
 $package_name = $operatingsystem ? {
-  debian  => 'git',
-  default => 'git-core',
+  debian, ubuntu => 'git',
+  centos, redhat => 'git',
+  default        => 'git-core',
 }
 
 class git {
