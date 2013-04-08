@@ -9,13 +9,12 @@
 #  class { 'git': }
 #
 
-$package_name = $operatingsystem ? {
-  debian, ubuntu => 'git',
-  centos, redhat => 'git',
-  default        => 'git-core',
-}
-
 class git {
+  case $operatingsystem {
+    centos, redhat, debian, ubuntu: { $package_name = 'git' }
+    default: { $package_name = 'git-core' }
+  }
+
   package { $package_name:
     ensure => installed,
   }
